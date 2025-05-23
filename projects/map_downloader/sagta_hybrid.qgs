@@ -1,5 +1,5 @@
 <!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
-<qgis saveDateTime="2025-05-23T12:21:11" saveUser="jeremy" saveUserFull="Jeremy" projectname="" version="3.42.3-Münster">
+<qgis saveDateTime="2025-05-23T13:54:35" saveUser="jeremy" saveUserFull="Jeremy" projectname="" version="3.42.3-Münster">
   <homePath path=""/>
   <title></title>
   <transaction mode="AutomaticGroups"/>
@@ -42,7 +42,7 @@
       <layer-tree-layer providerKey="wms" id="5m_Spot_Heights_0dc42c98_5fea_4222_8976_6e6061296324" legend_split_behavior="0" patch_size="0,0" source="contextualWMSLegend=0&amp;crs=EPSG:3857&amp;dpiMode=7&amp;featureCount=10&amp;format=image/png&amp;layers=kartoza:5m_spot_heights&amp;styles&amp;url=https://maps.kartoza.com/geoserver/wms" name="Elevation Points >1in20k" expanded="1" checked="Qt::Checked" legend_exp="">
         <customproperties>
           <Option type="Map">
-            <Option type="invalid" name="expandedLegendNodes"/>
+            <Option name="expandedLegendNodes"/>
           </Option>
         </customproperties>
       </layer-tree-layer>
@@ -81,7 +81,7 @@
         </customproperties>
       </layer-tree-layer>
     </layer-tree-group>
-    <layer-tree-group groupLayer="" name="Context Layers" expanded="1" checked="Qt::Unchecked">
+    <layer-tree-group groupLayer="" name="Context Layers" expanded="0" checked="Qt::Unchecked">
       <customproperties>
         <Option/>
       </customproperties>
@@ -118,21 +118,21 @@
       <layer-tree-layer providerKey="ogr" id="sa_provinces_e0515c6c_dabd_4e14_bc7f_de09db481339" legend_split_behavior="0" patch_size="0,0" source="./data/sa_provinces.shp" name="sa_provinces" expanded="1" checked="Qt::Checked" legend_exp="">
         <customproperties>
           <Option type="Map">
-            <Option type="invalid" name="expandedLegendNodes"/>
+            <Option name="expandedLegendNodes"/>
           </Option>
         </customproperties>
       </layer-tree-layer>
       <layer-tree-layer providerKey="wms" id="OSM_Toposheets_NGI_1e993297_33c9_49a0_9395_0e8e9021ba97" legend_split_behavior="0" patch_size="0,0" source="crs=EPSG:3857&amp;format&amp;type=xyz&amp;url=https://htonl.dev.openstreetmap.org/ngi-tiles/tiles/50k/%7Bz%7D/%7Bx%7D/%7B-y%7D.png&amp;zmax=18&amp;zmin=0" name="1in50k Topographic map" expanded="1" checked="Qt::Checked" legend_exp="">
         <customproperties>
           <Option type="Map">
-            <Option type="invalid" name="expandedLegendNodes"/>
+            <Option name="expandedLegendNodes"/>
           </Option>
         </customproperties>
       </layer-tree-layer>
       <layer-tree-layer providerKey="wms" id="NGI_OSM_Photos_8f3f85b5_e256_432c_9270_54b23151db75" legend_split_behavior="0" patch_size="0,0" source="crs=EPSG:3857&amp;format&amp;type=xyz&amp;url=http://c.aerial.openstreetmap.org.za/ngi-aerial/%7Bz%7D/%7Bx%7D/%7By%7D.jpg&amp;zmax=18&amp;zmin=0" name="NGI-OSM-Photos" expanded="1" checked="Qt::Checked" legend_exp="">
         <customproperties>
           <Option type="Map">
-            <Option type="invalid" name="expandedLegendNodes"/>
+            <Option name="expandedLegendNodes"/>
           </Option>
         </customproperties>
       </layer-tree-layer>
@@ -224,7 +224,7 @@
         </filegroup>
       </legendlayer>
     </legendgroup>
-    <legendgroup name="Context Layers" open="true" checked="Qt::Unchecked">
+    <legendgroup name="Context Layers" open="false" checked="Qt::Unchecked">
       <legendlayer showFeatureCount="0" name="NGI 50k Rivers" drawingOrder="-1" open="true" checked="Qt::Unchecked">
         <filegroup hidden="false" open="true">
           <legendlayerfile visible="0" layerid="NGI_50k_Rivers_70d98462_d28b_4ae8_85e2_17d0bfbbbd0b" isInOverview="0"/>
@@ -4923,12 +4923,12 @@ def my_form_open(dialog, layer, feature):
   </dataDefinedServerProperties>
   <visibility-presets>
     <visibility-preset has-expanded-info="1" has-checked-group-info="1" name="Hybrid">
-      <layer visible="1" id="OSM_Toposheets_NGI_1e993297_33c9_49a0_9395_0e8e9021ba97" style="default" expanded="1"/>
-      <expanded-legend-nodes id="OSM_Toposheets_NGI_1e993297_33c9_49a0_9395_0e8e9021ba97"/>
       <layer visible="1" id="5m_Spot_Heights_0dc42c98_5fea_4222_8976_6e6061296324" style="default" expanded="1"/>
       <expanded-legend-nodes id="5m_Spot_Heights_0dc42c98_5fea_4222_8976_6e6061296324"/>
       <layer visible="1" id="sa_provinces_e0515c6c_dabd_4e14_bc7f_de09db481339" style="default" expanded="1"/>
       <expanded-legend-nodes id="sa_provinces_e0515c6c_dabd_4e14_bc7f_de09db481339"/>
+      <layer visible="1" id="OSM_Toposheets_NGI_1e993297_33c9_49a0_9395_0e8e9021ba97" style="default" expanded="1"/>
+      <expanded-legend-nodes id="OSM_Toposheets_NGI_1e993297_33c9_49a0_9395_0e8e9021ba97"/>
       <layer visible="1" id="NGI_OSM_Photos_8f3f85b5_e256_432c_9270_54b23151db75" style="default" expanded="1"/>
       <expanded-legend-nodes id="NGI_OSM_Photos_8f3f85b5_e256_432c_9270_54b23151db75"/>
       <checked-group-nodes>
