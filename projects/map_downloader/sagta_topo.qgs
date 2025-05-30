@@ -1,5 +1,5 @@
 <!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
-<qgis saveDateTime="2025-05-30T10:19:10" projectname="" version="3.42.3-Münster" saveUserFull="Jeremy" saveUser="jeremy">
+<qgis saveDateTime="2025-05-30T11:58:26" projectname="" version="3.42.3-Münster" saveUserFull="Jeremy" saveUser="jeremy">
   <homePath path=""/>
   <title></title>
   <transaction mode="AutomaticGroups"/>
@@ -37,7 +37,9 @@
     </customproperties>
     <layer-tree-group expanded="1" groupLayer="" name="NGI Topo Vectors" checked="Qt::Unchecked">
       <customproperties>
-        <Option/>
+        <Option type="Map">
+          <Option name="wmsShortName" type="QString" value="NGI_Topo_Vectors"/>
+        </Option>
       </customproperties>
       <layer-tree-layer source="contextualWMSLegend=0&amp;crs=EPSG:3857&amp;dpiMode=7&amp;featureCount=10&amp;format=image/png&amp;layers=kartoza:5m_spot_heights&amp;styles&amp;url=https://maps.kartoza.com/geoserver/wms" providerKey="wms" legend_exp="" expanded="1" name="South Africa Elevation Points >1in20k" checked="Qt::Unchecked" legend_split_behavior="0" id="5m_Spot_Heights_0dc42c98_5fea_4222_8976_6e6061296324" patch_size="0,0">
         <customproperties>
@@ -66,9 +68,11 @@
         </customproperties>
       </layer-tree-layer>
     </layer-tree-group>
-    <layer-tree-group expanded="1" groupLayer="" name="Overview" checked="Qt::Checked">
+    <layer-tree-group expanded="1" groupLayer="" name="Overview" checked="Qt::Unchecked">
       <customproperties>
-        <Option/>
+        <Option type="Map">
+          <Option name="wmsShortName" type="QString" value="Overview"/>
+        </Option>
       </customproperties>
       <layer-tree-layer source="./data/namibia_provinces_4colour.shp" providerKey="ogr" legend_exp="" expanded="0" name="namibia_provinces_4colour" checked="Qt::Unchecked" legend_split_behavior="0" id="namibia_provinces_4colour_a4559d2b_f440_42d1_b3b8_84169e0935f3" patch_size="-1,-1">
         <customproperties>
@@ -88,7 +92,9 @@
     </layer-tree-group>
     <layer-tree-group expanded="1" groupLayer="" name="Map Guide" checked="Qt::Checked">
       <customproperties>
-        <Option/>
+        <Option type="Map">
+          <Option name="wmsShortName" type="QString" value="Map_Guide"/>
+        </Option>
       </customproperties>
       <layer-tree-layer source="./data/index1in10k.shp|layername=index1in10k" providerKey="ogr" legend_exp="" expanded="1" name="South Africa Map sheet index 1in10k" checked="Qt::Unchecked" legend_split_behavior="0" id="index1in10k_fd8a96fa_411c_4d74_b71e_247000c88b37" patch_size="0,0">
         <customproperties>
@@ -113,16 +119,18 @@
     </layer-tree-group>
     <layer-tree-group expanded="1" groupLayer="" name="Topographic Basemap" checked="Qt::Checked">
       <customproperties>
-        <Option/>
+        <Option type="Map">
+          <Option name="wmsShortName" type="QString" value="Topographic_Basemap"/>
+        </Option>
       </customproperties>
-      <layer-tree-layer source="crs=EPSG:3857&amp;format&amp;http-header:referer=&amp;tilePixelRatio=1&amp;type=xyz&amp;url=https://htonl.dev.openstreetmap.org/ngi-tiles/tiles/50k/%7Bz%7D/%7Bx%7D/%7B-y%7D.png&amp;zmax=15&amp;zmin=0" providerKey="wms" legend_exp="" expanded="1" name="South Africa 1in50k Topographic map" checked="Qt::Checked" legend_split_behavior="0" id="OSM_Toposheets_NGI_1e993297_33c9_49a0_9395_0e8e9021ba97" patch_size="0,0">
+      <layer-tree-layer source="crs=EPSG:3857&amp;format&amp;http-header:referer=&amp;tilePixelRatio=1&amp;type=xyz&amp;url=https://htonl.dev.openstreetmap.org/ngi-tiles/tiles/50k/%7Bz%7D/%7Bx%7D/%7B-y%7D.png&amp;zmax=15&amp;zmin=4" providerKey="wms" legend_exp="" expanded="1" name="South Africa 1in50k Topographic map" checked="Qt::Checked" legend_split_behavior="0" id="OSM_Toposheets_NGI_1e993297_33c9_49a0_9395_0e8e9021ba97" patch_size="0,0">
         <customproperties>
           <Option type="Map">
             <Option name="expandedLegendNodes" type="invalid"/>
           </Option>
         </customproperties>
       </layer-tree-layer>
-      <layer-tree-layer source="crs=EPSG:3857&amp;format&amp;http-header:referer=&amp;tilePixelRatio=1&amp;type=xyz&amp;url=https://namibia-topo.openstreetmap.org.za/layer/na_sgswa_topo_50k/%7Bz%7D/%7Bx%7D/%7By%7D.png&amp;zmax=15&amp;zmin=0" providerKey="wms" legend_exp="" expanded="1" name="Namibia 1in50k Topographic map" checked="Qt::Checked" legend_split_behavior="0" id="_26e98807_52a6_489f_bfde_8e5aabb2bde4" patch_size="-1,-1">
+      <layer-tree-layer source="crs=EPSG:3857&amp;format&amp;http-header:referer=&amp;tilePixelRatio=1&amp;type=xyz&amp;url=https://namibia-topo.openstreetmap.org.za/layer/na_sgswa_topo_50k/%7Bz%7D/%7Bx%7D/%7By%7D.png&amp;zmax=15&amp;zmin=4" providerKey="wms" legend_exp="" expanded="1" name="Namibia 1in50k Topographic map" checked="Qt::Checked" legend_split_behavior="0" id="_26e98807_52a6_489f_bfde_8e5aabb2bde4" patch_size="-1,-1">
         <customproperties>
           <Option type="Map">
             <Option name="expandedLegendNodes" type="invalid"/>
@@ -132,7 +140,9 @@
     </layer-tree-group>
     <layer-tree-group expanded="1" groupLayer="" name="Orthophoto" checked="Qt::Unchecked">
       <customproperties>
-        <Option/>
+        <Option type="Map">
+          <Option name="wmsShortName" type="QString" value="Orthophoto"/>
+        </Option>
       </customproperties>
       <layer-tree-layer source="./data/sa_provinces.shp" providerKey="ogr" legend_exp="" expanded="1" name="sa_provinces" checked="Qt::Unchecked" legend_split_behavior="0" id="sa_provinces_e0515c6c_dabd_4e14_bc7f_de09db481339" patch_size="0,0">
         <customproperties>
@@ -183,10 +193,10 @@
   <mapcanvas annotationsVisible="1" name="theMapCanvas">
     <units>meters</units>
     <extent>
-      <xmin>1220353.50662628980353475</xmin>
-      <ymin>-4199585.65833965409547091</ymin>
-      <xmax>3733391.01128444029018283</xmax>
-      <ymax>-1835454.0247654418926686</ymax>
+      <xmin>2280531.10517174331471324</xmin>
+      <ymin>-3682501.03869524691253901</ymin>
+      <xmax>2319797.31618202710524201</xmax>
+      <ymax>-3645561.48192065022885799</ymax>
     </extent>
     <rotation>0</rotation>
     <destinationsrs>
@@ -229,7 +239,7 @@
         </filegroup>
       </legendlayer>
     </legendgroup>
-    <legendgroup open="true" name="Overview" checked="Qt::Checked">
+    <legendgroup open="true" name="Overview" checked="Qt::Unchecked">
       <legendlayer drawingOrder="-1" open="false" checked="Qt::Unchecked" name="namibia_provinces_4colour" showFeatureCount="0">
         <filegroup open="false" hidden="false">
           <legendlayerfile isInOverview="0" layerid="namibia_provinces_4colour_a4559d2b_f440_42d1_b3b8_84169e0935f3" visible="0"/>
@@ -1726,8 +1736,8 @@
         <ymax>85.05112877980660357</ymax>
       </wgs84extent>
       <id>OSM_Toposheets_NGI_1e993297_33c9_49a0_9395_0e8e9021ba97</id>
-      <datasource>crs=EPSG:3857&amp;format&amp;http-header:referer=&amp;tilePixelRatio=1&amp;type=xyz&amp;url=https://htonl.dev.openstreetmap.org/ngi-tiles/tiles/50k/%7Bz%7D/%7Bx%7D/%7B-y%7D.png&amp;zmax=15&amp;zmin=0</datasource>
-      <shortname>topographic_map_ngi</shortname>
+      <datasource>crs=EPSG:3857&amp;format&amp;http-header:referer=&amp;tilePixelRatio=1&amp;type=xyz&amp;url=https://htonl.dev.openstreetmap.org/ngi-tiles/tiles/50k/%7Bz%7D/%7Bx%7D/%7B-y%7D.png&amp;zmax=15&amp;zmin=4</datasource>
+      <shortname>sa_topographic_map_ngi</shortname>
       <title>South Africa 1in50k Topographic map</title>
       <abstract>The 1:50 000 topographical maps provide full coverage of South Africa. They accurately depict the location of natural and man-made features by means of symbols and colour, and elevation by means of spot-heights and contours (20m interval). Additional information includes place names, boundaries, magnetic data, etc. These maps contain essential information for planning and decision making but also have many other uses. The 1:50 000 topographical maps are generally compiled from aerial photographs. A standard 1:50 000 map sheet covers a rectangle of 15 minutes of latitude by 15 minutes of longitude or approximately 640 squarekilometres.
 
@@ -1789,7 +1799,7 @@ Ellipsoid : WGS84, sheets prior to 1999 Clarke 1880 (modified)</abstract>
           </spatialrefsys>
         </crs>
         <extent>
-          <spatial minz="0" miny="0" minx="0" maxx="0" maxy="0" crs="EPSG:3857" dimensions="2" maxz="0"/>
+          <spatial minz="0" miny="-20037508.34279999881982803" minx="-20037508.34279999881982803" maxx="20037508.34279999881982803" maxy="20037508.34279999881982803" crs="EPSG:3857" dimensions="2" maxz="0"/>
           <temporal>
             <period>
               <start></start>
@@ -1961,7 +1971,7 @@ Ellipsoid : WGS84, sheets prior to 1999 Clarke 1880 (modified)</abstract>
         <ymax>85.05112877980660357</ymax>
       </wgs84extent>
       <id>_26e98807_52a6_489f_bfde_8e5aabb2bde4</id>
-      <datasource>crs=EPSG:3857&amp;format&amp;http-header:referer=&amp;tilePixelRatio=1&amp;type=xyz&amp;url=https://namibia-topo.openstreetmap.org.za/layer/na_sgswa_topo_50k/%7Bz%7D/%7Bx%7D/%7By%7D.png&amp;zmax=15&amp;zmin=0</datasource>
+      <datasource>crs=EPSG:3857&amp;format&amp;http-header:referer=&amp;tilePixelRatio=1&amp;type=xyz&amp;url=https://namibia-topo.openstreetmap.org.za/layer/na_sgswa_topo_50k/%7Bz%7D/%7Bx%7D/%7By%7D.png&amp;zmax=15&amp;zmin=4</datasource>
       <shortname>namibia_topographic_map</shortname>
       <title>Namibia 1in50k Topographic map</title>
       <abstract>The 1:50 000 topographical maps provide full coverage of Namibia.</abstract>
@@ -3507,6 +3517,7 @@ def my_form_open(dialog, layer, feature):
       </wgs84extent>
       <id>nam_index1in50k_48997b4d_32b0_43ad_9c72_06ca959b79d7</id>
       <datasource>./data/nam_index1in50k.shp</datasource>
+      <shortname>Namibia_Map_sheet_index_1in50K</shortname>
       <keywordList>
         <value></value>
       </keywordList>
@@ -4104,6 +4115,7 @@ def my_form_open(dialog, layer, feature):
       </wgs84extent>
       <id>namibia_provinces_4colour_a4559d2b_f440_42d1_b3b8_84169e0935f3</id>
       <datasource>./data/namibia_provinces_4colour.shp</datasource>
+      <shortname>namibia_provinces_4colour</shortname>
       <keywordList>
         <value></value>
       </keywordList>
@@ -4641,6 +4653,7 @@ def my_form_open(dialog, layer, feature):
       </wgs84extent>
       <id>provinces_4colour_ff4e742e_4c51_4880_9c6e_e76ce37f8fc1</id>
       <datasource>./data/provinces_4colour.shp|layername=provinces_4colour</datasource>
+      <shortname>south_africa_provinces_4colour</shortname>
       <keywordList>
         <value></value>
       </keywordList>
@@ -5178,6 +5191,7 @@ def my_form_open(dialog, layer, feature):
       </wgs84extent>
       <id>sa_index1in50k_f4d5d2ae_687c_409d_9cfd_5d759e50128e</id>
       <datasource>./data/sa_index1in50k.shp</datasource>
+      <shortname>South_Africa_Map_sheet_index_1in50K</shortname>
       <keywordList>
         <value></value>
       </keywordList>
@@ -5775,6 +5789,7 @@ def my_form_open(dialog, layer, feature):
       </wgs84extent>
       <id>sa_provinces_e0515c6c_dabd_4e14_bc7f_de09db481339</id>
       <datasource>./data/sa_provinces.shp</datasource>
+      <shortname>sa_provinces</shortname>
       <keywordList>
         <value></value>
       </keywordList>
@@ -6419,7 +6434,7 @@ def my_form_open(dialog, layer, feature):
         <value>lizmap_user_groups</value>
       </variableNames>
       <variableValues type="QStringList">
-        <value></value>
+        <value>mapdownloader</value>
         <value></value>
         <value></value>
       </variableValues>
@@ -6471,7 +6486,7 @@ def my_form_open(dialog, layer, feature):
       <value>ZANGI:ZANGI:CPNO31</value>
       <value>ZANGI:ZANGI:CPNO33</value>
     </WMSCrsList>
-    <WMSDefaultMapUnitsPerMm type="double">4.491576420597607e-09</WMSDefaultMapUnitsPerMm>
+    <WMSDefaultMapUnitsPerMm type="double">4.491576049119876e-09</WMSDefaultMapUnitsPerMm>
     <WMSExtent type="QStringList">
       <value>1785515.95790000003762543</value>
       <value>-4301227.28120000008493662</value>
@@ -13890,7 +13905,7 @@ def my_form_open(dialog, layer, feature):
   <Sensors/>
   <ProjectViewSettings rotation="0" UseProjectScales="0">
     <Scales/>
-    <DefaultViewExtent xmin="433713.55316042341291904" xmax="4520030.96475030668079853" ymax="-1835454.0247654418926686" ymin="-4199585.65833965409547091">
+    <DefaultViewExtent xmin="2259523.78070483356714249" xmax="2340804.64064893685281277" ymax="-3645561.48192065022885799" ymin="-3682501.03869524691253901">
       <spatialrefsys nativeFormat="Wkt">
         <wkt>PROJCRS["WGS 84 / Pseudo-Mercator",BASEGEOGCRS["WGS 84",ENSEMBLE["World Geodetic System 1984 ensemble",MEMBER["World Geodetic System 1984 (Transit)"],MEMBER["World Geodetic System 1984 (G730)"],MEMBER["World Geodetic System 1984 (G873)"],MEMBER["World Geodetic System 1984 (G1150)"],MEMBER["World Geodetic System 1984 (G1674)"],MEMBER["World Geodetic System 1984 (G1762)"],MEMBER["World Geodetic System 1984 (G2139)"],ELLIPSOID["WGS 84",6378137,298.257223563,LENGTHUNIT["metre",1]],ENSEMBLEACCURACY[2.0]],PRIMEM["Greenwich",0,ANGLEUNIT["degree",0.0174532925199433]],ID["EPSG",4326]],CONVERSION["Popular Visualisation Pseudo-Mercator",METHOD["Popular Visualisation Pseudo Mercator",ID["EPSG",1024]],PARAMETER["Latitude of natural origin",0,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8801]],PARAMETER["Longitude of natural origin",0,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8802]],PARAMETER["False easting",0,LENGTHUNIT["metre",1],ID["EPSG",8806]],PARAMETER["False northing",0,LENGTHUNIT["metre",1],ID["EPSG",8807]]],CS[Cartesian,2],AXIS["easting (X)",east,ORDER[1],LENGTHUNIT["metre",1]],AXIS["northing (Y)",north,ORDER[2],LENGTHUNIT["metre",1]],USAGE[SCOPE["Web mapping and visualisation."],AREA["World between 85.06°S and 85.06°N."],BBOX[-85.06,-180,85.06,180]],ID["EPSG",3857]]</wkt>
         <proj4>+proj=merc +a=6378137 +b=6378137 +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs</proj4>
