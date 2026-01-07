@@ -1,0 +1,3 @@
+[submodule "lizmap"]
+	path = lizmap
+	url = https://github.com/3liz/lizmap-docker-compose.git
