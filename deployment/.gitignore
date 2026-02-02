@@ -1,0 +1,6 @@
+# Runtime directories (created by setup.sh)
+lizmap/
+projects/
+
+# Environment file (contains local settings)
+.env
