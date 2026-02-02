@@ -23,9 +23,84 @@ setup an automated way to share these projects. Currently the repository contain
 these are only updated when they are significant changes. To setup the projects and update them you will 
 need to follow instructions in [QGIS Desktop Setup](https://github.com/kartoza/SAGTA/tree/main/qgis_desktop_setup#readme)
 
-### Docker-Compose Deployment
-The instructions below assume you are running docker compose version 1. If you are running
-version 2 you will need to replace all instances of `docker-compose` with `docker compose`.
+### Docker-Compose Deployment (Simplified)
+
+The deployment folder contains everything needed to run Lizmap without cloning external repositories.
+
+#### Quick Start
+
+```bash
+# Clone the SAGTA repository
+git clone git@github.com:kartoza/SAGTA.git
+cd SAGTA/deployment
+
+# Run the setup script
+./setup.sh
+
+# Edit .env to adjust settings (optional)
+nano .env
+
+# Start the services
+docker compose pull
+docker compose up -d
+
+# Install Lizmap server plugin
+docker compose exec map qgis-plugin-manager init
+docker compose exec map qgis-plugin-manager update
+docker compose exec map qgis-plugin-manager install "Lizmap server"
+docker compose restart map
+```
+
+Access Lizmap at http://localhost:8090 (default credentials: `admin` / `admin`)
+
+#### Using SAGTA Projects
+
+To use the SAGTA QGIS projects, update your `.env`:
+
+```bash
+LIZMAP_PROJECTS=../projects
+```
+
+Or copy the projects to the deployment folder:
+
+```bash
+cp -r ../projects/* ./projects/
+```
+
+#### Directory Structure
+
+After running `setup.sh`, the following structure is created:
+
+```
+deployment/
+├── docker-compose.yml
+├── .env
+├── config/
+│   ├── nginx.conf
+│   └── pg_service.conf.example
+├── lizmap/
+│   ├── etc/           # Configuration files
+│   ├── plugins/       # QGIS server plugins
+│   ├── var/           # Runtime data
+│   ├── www/           # Web assets
+│   └── mapproxy/      # MapProxy configuration
+└── projects/          # QGIS projects
+```
+
+#### Custom QGIS Server Plugins
+
+Copy custom plugins to the plugins directory:
+
+```bash
+cp -r ../plugins/qgisserver/* ./lizmap/plugins/
+```
+
+**Note:** The default login credentials are `admin:admin`.
+
+### Legacy Deployment (using lizmap-docker-compose)
+
+<details>
+<summary>Click to expand legacy deployment instructions</summary>
 
 * Make a deployment folder where all source code will be stored
 
@@ -39,66 +114,42 @@ version 2 you will need to replace all instances of `docker-compose` with `docke
     ```bash
     git clone git@github.com:kartoza/SAGTA.git
     git clone git@github.com:3liz/lizmap-docker-compose.git
-    git clone git@github.com:kartoza/lizmap-web-client.git
     ```
-* Navigate to the `lizmap-docker-compose` folder.
+
+* Navigate to the `lizmap-docker-compose` folder and configure:
+
   ```bash
   cd lizmap-docker-compose
-  ```
-* Generate the configs in the folder.
-
-  ```bash
   make configure
-  ```
-* Remove the test QGIS projects from the repo. 
-    ```bash
-    rm -rf ./lizmap/instances/*
-    ```
-* Copy the `docker-compose.yml` from the `SAGTA` repository into this current one.
-
-  ```bash
-  cp -r  /home/${user}/deployment/map_downloader/SAGTA/deployment/docker-compose.yml .
-  ```
-* Copy the `env.example` from the `SAGTA` repository into this folder.
-
-  ```bash
-  cp -r /home/${user}/deployment/map_downloader/SAGTA/deployment/env.example .env
+  rm -rf ./lizmap/instances/*
   ```
 
-* Adjust the two paths specified in `.env` file to reference the correct paths.
+* Copy configuration from SAGTA:
 
-    Original copied path:
-    ```bash
-    LIZMAP_PROJECTS=/tmp/lizmap/docker-compose/lizmap/instances
-    LIZMAP_DIR=/tmp/lizmap/docker-compose/lizmap 
-    ```
-  Change them to match the following:
   ```bash
-  LIZMAP_PROJECTS=/home/${user}/deployment/map_downloader/lizmap-docker-compose/lizmap/instances
-  LIZMAP_DIR=/home/${user}/deployment/map_downloader/lizmap-docker-compose/lizmap 
-  ```
-* Copy the `plugins` folder from the `SAGTA` plugin folder into the plugin directory.
-  ```bash
-  cp -r /home/${user}/deployment/map_downloader/SAGTA/plugins/qgisserver/* ./lizmap/plugins/
+  cp ../SAGTA/deployment/docker-compose.yml .
+  cp ../SAGTA/deployment/env.example .env
   ```
 
-* Copy the QGIS projects from the QGIS projects from the `SAGTA` repository. 
-  ```bash
-  cp -r /home/${user}/deployment/map_downloader/SAGTA/projects/* ./lizmap/instances/
-  ```
-* Get the services up by running 
-  ```bash
-  docker-compose up -d
-  ```
-**Note:** The default login credentials are `admin:admin`.
+* Update `.env` paths to match your deployment location.
 
-* Stop the services running to enable the profile tool.
+* Copy plugins and projects:
+
   ```bash
-  docker-compose stop
+  cp -r ../SAGTA/plugins/qgisserver/* ./lizmap/plugins/
+  cp -r ../SAGTA/projects/* ./lizmap/instances/
   ```
-* Activate the Profile tool following instructions from 
+
+* Start services:
+
+  ```bash
+  docker compose up -d
+  ```
+
+</details>
+
+* Activate the Profile tool following instructions from
 [profile-plugin](https://github.com/kartoza/SAGTA/tree/main/plugins/lizmap/profile_tool/README.md)
-* Access the services from the URL http://localhost
 
 #### SAGTA Oauth Deployment
 

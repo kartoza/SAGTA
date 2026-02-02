@@ -1,0 +1,6 @@
+[lizmap_local]
+host=db.lizmap
+port=5432
+dbname=lizmap
+user=lizmap
+password=lizmap1234!

@@ -1,7 +1,6 @@
-version: '3.8'
 services:
   lizmap:
-    image: 3liz/lizmap-web-client:${LIZMAP_VERSION_TAG}
+    image: ${DOCKER_REGISTRY}/lizmap-web-client:${LIZMAP_VERSION_TAG}
     environment:
       LIZMAP_CACHEREDISDB: '1'
       LIZMAP_CACHEREDISHOST: redis
@@ -9,6 +8,7 @@ services:
       LIZMAP_HOME: /srv/lizmap
       LIZMAP_USER: ${LIZMAP_UID}
       LIZMAP_WMSSERVERURL: http://map:8080/ows/
+      LIZMAP_LIZMAPSERVERURL: http://map:8080/lizmap/
       LIZMAP_CONFIG_INCLUDE: /srv/etc
       PGSERVICEFILE: /srv/etc/pg_service.conf
       PGPASSFILE: /srv/etc/pgpass.conf
@@ -18,17 +18,17 @@ services:
       - ${LIZMAP_DIR}/var/lizmap-config:/www/lizmap/var/config
       - ${LIZMAP_DIR}/var/lizmap-db:/www/lizmap/var/db
       - ${LIZMAP_DIR}/www:/www/lizmap/www
-      - ${LIZMAP_DIR}/www/var/log:/www/lizmap/var/log
+      - ${LIZMAP_DIR}/var/lizmap-log:/www/lizmap/var/log
       - ${LIZMAP_DIR}/var/lizmap-modules:/www/lizmap/lizmap-modules
       - ${LIZMAP_DIR}/var/lizmap-my-packages:/www/lizmap/my-packages
       - ${LIZMAP_DIR}/etc:/srv/etc:ro
-      #- ./map.js:/www/lizmap/www.dist/assets/js/map.js
     command:
       - php-fpm
     restart: unless-stopped
 
   map:
-    image: 3liz/qgis-map-server:${QGIS_VERSION_TAG}
+    # Note: QGIS_REGISTRY defaults to 3liz as dimasciput/qgis-map-server may not have all versions
+    image: ${QGIS_REGISTRY:-3liz}/qgis-map-server:${QGIS_VERSION_TAG}
     environment:
       QGSRV_CACHE_SIZE: '100'
       QGSRV_CACHE_ROOTDIR: /srv/projects
@@ -37,21 +37,19 @@ services:
       QGSRV_SERVER_WORKERS: ${QGIS_MAP_WORKERS}
       QGSRV_SERVER_PLUGINPATH: /srv/plugins
       PGSERVICEFILE: /srv/etc/pg_service.conf
-      PGSPASSFILE: /srv/etc/pgpass.conf
+      PGPASSFILE: /srv/etc/pgpass.conf
       QGIS_OPTIONS_PATH: /srv/etc/qgis
       QGIS_PROJECT_FILE:
       QGSRV_SERVER_TIMEOUT: 1000
       QGIS_SERVER_SHOW_GROUP_SEPARATOR: 1
       QGIS_SERVER_IGNORE_BAD_LAYERS: 1
-      QGIS_SERVER_DISABLE_GETPRINT: false
-      #QGIS_SERVER_LANDING_PAGE_PROJECTS_DIRECTORIES=/qgis/server_projects_directories
-      #QGIS_SERVER_LANDING_PAGE_PROJECTS_PG_CONNECTIONS=/qgis/server_projects_pg_connections
-      #QGIS_SERVER_LOG_PROFILE=/qgis/server_log_profile
+      QGIS_SERVER_DISABLE_GETPRINT: 'false'
       QGIS_SERVER_MAX_THREADS: -1
-      QGIS_SERVER_OVERRIDE_SYSTEM_LOCALE: 
       QGIS_SERVER_PARALLEL_RENDERING: 1
       QGIS_SERVER_TRUST_LAYER_METADATA: 1
       QGSRV_CACHE_STRICT_CHECK: 'no'
+      QGIS_SERVER_LIZMAP_REVEAL_SETTINGS: 'true'
+      QGSRV_API_ENABLED_LIZMAP: 'yes'
     volumes:
       - ${LIZMAP_PROJECTS}:/srv/projects
       - ${LIZMAP_DIR}/etc:/srv/etc:ro
@@ -65,6 +63,7 @@ services:
     image: redis:5-alpine
     volumes:
       - redis_data:/data
+    restart: unless-stopped
 
   mapproxy:
     image: kartoza/mapproxy
@@ -75,16 +74,16 @@ services:
       MAPPROXY_USER_ID: ${MAPPROXY_USER_ID}
       MAPPROXY_GROUP_ID: ${MAPPROXY_GROUP_ID}
     volumes:
-      - ./configuration:/mapproxy
+      - ${LIZMAP_DIR}/mapproxy:/mapproxy
     ports:
-      - "8092:8080"
+      - ${MAPPROXY_PORT}:8080
     depends_on:
       - map
     restart: unless-stopped
 
   web:
     image: nginx:1
-    user: ${LIZMAP_UID}:${LIZMAP_UID}
+    user: ${LIZMAP_UID}:${LIZMAP_GID}
     volumes:
       - ${LIZMAP_DIR}/etc/nginx.conf:/etc/nginx/nginx.conf
       - ${LIZMAP_DIR}/var/log/nginx:/var/log/nginx
@@ -96,8 +95,12 @@ services:
       - lizmap
       - map
       - mapproxy
+    restart: unless-stopped
+
   postgis:
     image: kartoza/postgis:${POSTGIS_VERSION}
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
       - postgis_data:/var/lib/postgresql/
     ports:
@@ -110,10 +113,10 @@ services:
       - postgis
     healthcheck:
       test: "pg_isready"
+    restart: unless-stopped
 
 volumes:
-    postgis_data:
-        driver: local
-    redis_data:
-        driver: local
-
+  postgis_data:
+    driver: local
+  redis_data:
+    driver: local
