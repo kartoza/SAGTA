@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   lizmap:
-    image: 3liz/lizmap-web-client:${LIZMAP_VERSION_TAG}
+    image: ${DOCKER_REGISTRY}/lizmap-web-client:${LIZMAP_VERSION_TAG}
     environment:
       LIZMAP_CACHEREDISDB: '1'
       LIZMAP_CACHEREDISHOST: redis
