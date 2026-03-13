@@ -2,19 +2,9 @@
 // Layer Activation and Deactivation tests for z_sa Project
 
 import { test, expect } from '@playwright/test';
+import { login } from './support/auth';
 
 test.describe('Layer Activation and Deactivation - z_sa Project', () => {
-  // Helper function to login
-  async function login(page) {
-    await page.goto('https://sta.sagta.kartoza.com/');
-    const usernameField = page.locator('input[type="text"], input[name*="user"], input[placeholder*="user"]').first();
-    await usernameField.fill('admin');
-    const passwordField = page.locator('input[type="password"]');
-    await passwordField.fill('admin');
-    const loginButton = page.locator('button:has-text("Login"), button:has-text("Sign"), input[type="submit"]').first();
-    await loginButton.click();
-    await page.waitForLoadState('networkidle');
-  }
 
   test('Activate All Layers in z_sa', async ({ page }) => {
     // Precondition: User is logged in and viewing z_sa project
