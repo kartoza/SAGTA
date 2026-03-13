@@ -131,3 +131,4 @@ dmypy.json
 projects/map_downloader/*.ba*
 projects/map_downloader/*.qgs~
 .idea
+.auth.json
