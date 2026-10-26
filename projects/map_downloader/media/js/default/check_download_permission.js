@@ -1,16 +1,42 @@
 lizMap.events.on({
   'uicreated': function (e) {
-    // If #print-launch is missing or empty, trigger print panel
-    if ($('#print-launch').length === 0 || $.trim($('#print-launch').html()) === '') {
-      $('#button-print').click();
-    }
-
-    const $original = $('#print-launch');
-
-    if ($original.length === 0) {
-      console.warn('#print-launch button not found even after clicking #button-print');
+    // uicreated can fire more than once and clicking #button-print toggles the panel
+    if (window.__printPatchInit) {
       return;
     }
+    window.__printPatchInit = true;
+
+    // Lizmap >= 3.9: <lizmap-print> only renders #print-launch once it is defined
+    // and the print panel is opened afterwards, so wait for it and retry.
+    customElements.whenDefined('lizmap-print').then(function () {
+      const $button = $('#button-print');
+      let attempts = 0;
+
+      const ensurePrintPanel = function () {
+        if ($('#print-launch').length > 0) {
+          setup();
+          return;
+        }
+        if (++attempts > 20) {
+          console.warn('#print-launch button not found even after clicking #button-print');
+          return;
+        }
+        // On the 1st and every 5th attempt (re)open the panel; if it is marked
+        // open but empty, close it first so it triggers a fresh open.
+        if (attempts === 1 || attempts % 5 === 0) {
+          if ($button.parent().hasClass('active')) {
+            $button.click();
+          }
+          $button.click();
+        }
+        setTimeout(ensurePrintPanel, 250);
+      };
+
+      ensurePrintPanel();
+    });
+
+    function setup() {
+      const $original = $('#print-launch');
 
     const $clone = $original.clone().attr('id', 'print-launch-clone');
     $original.parent().append($clone);
@@ -54,5 +80,6 @@ lizMap.events.on({
           $clone.prop('disabled', false);
         });
     });
+    }
   }
 });
