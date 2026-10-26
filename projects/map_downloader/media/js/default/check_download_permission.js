@@ -50,13 +50,10 @@ lizMap.events.on({
         .then(function (data) {
           try {
             const allowed = data?.allowed;
-            const isAnonymous = data?.detail === "Authentication credentials were not provided.";
+            // SAGTA answers with this message when the token is missing, invalid or expired
+            const sessionExpired = data?.detail === "Authentication credentials were not provided.";
 
-            if (allowed || isAnonymous) {
-              if (isAnonymous) {
-                console.warn("User is anonymous – allowing print by default.");
-              }
-
+            if (allowed) {
               $clone.hide();
               $original.show().trigger('click');
 
@@ -68,7 +65,11 @@ lizMap.events.on({
                 }
               }, 100);
             } else {
-              alert("You are not allowed to download maps anymore. Please upgrade to a membership.");
+              if (sessionExpired) {
+                alert("Your SAGTA session has expired. Please log in again.");
+              } else {
+                alert("You are not allowed to download maps anymore. Please upgrade to a membership.");
+              }
             }
           } catch (err) {
             console.error('Error processing member response:', err);
